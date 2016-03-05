@@ -1,0 +1,97 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/templates/template.xhtml">
+
+	<ui:define name="comandos">
+	<h:panelGrid columns="3">
+		<h:commandButton action="#{usuarioMB.irParaAlterar()}" value="#{velcao['botao.novo']}" />
+	</h:panelGrid>
+	
+	</ui:define>
+		
+	<ui:define name="corpo">
+		 
+		<h:panelGrid columns="3" width="400" columnClasses="column1, column2, " >
+			<h:outputLabel value="#{velcao['usuario']}" />
+			<h:inputText value="#{usuarioMB.nomeUsuario}"  size="55"/>
+			<a4j:commandButton value="#{velcao['botao.pesquisar']}" render="idListaUsuario" action="#{usuarioMB.pesquisar()}"></a4j:commandButton>
+		</h:panelGrid>
+		<br/>
+	
+		<rich:dataTable id="idListaUsuario" value="#{usuarioMB.listaUsuario}" iterationStatusVar="itVar" columnsWidth="5%,20%,20%,20%,,,5%"
+			rowClasses="row2,row1" var="item" rows="#{usuarioMB.quantidadesRowsPorTabela}" styleClass="width">
+			<f:facet name="header">
+				<h:outputText value="#{velcao['usuario.lista']}" styleClass="campoTextoBold" />
+			</f:facet>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="ID" />
+				</f:facet>
+				<h:outputText value="#{item.idUsuario}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{velcao['usuario.nome']}" />
+				</f:facet>
+				<h:outputText value="#{item.nome}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{velcao['usuario.email']}"  />
+				</f:facet>
+				<h:outputText value="#{item.email}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{velcao['usuario.cpf']}"  />
+				</f:facet>
+				<h:outputText value="#{item.cpf}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{velcao['usuario.telefone']}" />
+				</f:facet>
+				<h:outputText value="#{item.telefone}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{velcao['cargo']}" />
+				</f:facet>
+				<h:outputText value="#{item.cargo.nome}" />
+			</rich:column>
+			<rich:column >
+				<h:commandLink id="editar" action="#{usuarioMB.irParaAlterar()}" rendered="#{not item.administrador}">
+					<h:graphicImage value="/images/edit.gif" />
+					<f:setPropertyActionListener value="#{item}" target="#{usuarioMB.beanSelecionado}" />
+				</h:commandLink>
+				<a4j:commandLink oncomplete="#{rich:component('confimarExclusao')}.show()" render="@none" execute="@this" rendered="#{not item.administrador}">
+					<h:graphicImage value="/images/delete.gif" alt="delete" />
+					<a4j:param value="#{itVar.index}" assignTo="#{usuarioMB.currentIndex}" />
+				</a4j:commandLink>
+
+			</rich:column>
+			<f:facet name="footer">
+				<rich:dataScroller for="idListaUsuario" lastPageMode="short"  stepControls="auto"/>
+			</f:facet>
+		</rich:dataTable>
+		<!-- Parte abaixo é relacionado ao edição da tebela! -->
+		<!-- Funcao JS para deletar -->
+		<a4j:jsFunction name="remove" action="#{usuarioMB.deletar()}" render="idListaUsuario" execute="@this"
+			oncomplete="#{rich:component('confimarExclusao')}.hide();"  />
+
+		<rich:popupPanel id="confimarExclusao" autosized="true" header="#{velcao['botao.excluir']}">
+			<h:outputText value="#{velcao['mensagem.confirmar.exclusao']}" />
+			<br/>
+			<br/>
+			<a4j:commandButton value="#{velcao['botao.excluir']}" onclick="remove(); return false;"   />
+			<a4j:commandButton value="#{velcao['botao.cancelar']}" onclick="#{rich:component('confimarExclusao')}.hide(); return false;"  />
+		</rich:popupPanel>
+	
+	</ui:define>
+
+</ui:composition>

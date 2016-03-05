@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.connection.driver_class">org.gjt.mm.mysql.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://vcsoft.clientewebhost.com.br:3306/vcsoftcl_velcao?autoReconnect=true</property>
+		<property name="hibernate.connection.username">vcsoftcl_velcao</property>
+		<property name="hibernate.connection.password">Admvelcao12345*@</property>
+<!-- 		<property name="connection.pool_size">3</property> -->
+        <!-- TRANSACTION_NONE = 0 / TRANSACTION_READ_UNCOMMITTED = 1 / TRANSACTION_READ_COMMITTED=2 
+			/ TRANSACTION_REPEATABLE_READ = 4 / TRANSACTION_SERIALIZABLE = 8 -->
+		<!-- <property name="hibernate.connection.isolation">1</property> -->
+
+		
+		<property name="hibernate.show_sql">true</property> 
+		<mapping class="br.com.vanderson.model.Cargo"/>
+		<mapping class="br.com.vanderson.model.Usuario"/>
+		<mapping class="br.com.vanderson.model.AnimalMorto"/>
+	</session-factory>
+
+</hibernate-configuration>

@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich">
+<h:panelGrid columns="1">
+		<h:panelGroup>
+			<center>
+				<br/>
+				<rich:messages infoClass="mensagemsucesso" 
+					errorClass="mensagemerro" warnClass="mensagemalerta"
+					showDetail="false" showSummary="true" globalOnly="true"  >
+					<f:facet name="infoMarker">
+						<h:graphicImage value="/images/sucesso.gif" style="padding-right: 15px;"/>
+					</f:facet>
+					<f:facet name="errorMarker">
+						<h:graphicImage value="/images/erro.gif" style="padding-right: 15px;"/>
+					</f:facet>
+					<f:facet name="warnMarker">
+						<h:graphicImage value="/images/alerta.gif" style="padding-right: 15px;"/>
+					</f:facet>
+				</rich:messages>
+			</center>
+		</h:panelGroup>
+</h:panelGrid>
+
+</html>

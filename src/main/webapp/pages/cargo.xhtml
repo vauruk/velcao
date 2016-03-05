@@ -1,0 +1,46 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j" xmlns:rich="http://richfaces.org/rich"
+	template="/templates/template.xhtml">
+
+	<ui:define name="comandos">
+		<h:commandButton action="#{cargoMB.salvar()}"
+			value="#{velcao['botao.gravar']}" />
+		<h:commandButton action="#{cargoMB.irListaCargo()}"
+			value="#{velcao['botao.cancelar']}" styleClass="paddingLeft" immediate="true" />
+	</ui:define>
+
+	<ui:define name="corpo">
+		<div style="width: 400px;">
+			<fieldset>
+				<legend>
+					<b><h:outputText value="#{velcao['menu.cadastro']} " /> <h:outputText
+							value=" #{velcao['cargo']}" /> </b>
+				</legend>
+				<br />
+				<h:panelGrid columns="2" columnClasses="column1,column2"  width="100%">
+					<h:outputLabel value="#{velcao['cargo']}" for="nome" />
+					<h:inputText value="#{cargoMB.cargo.nome}" id="nome" maxlength="45"
+						size="50" required="true"
+						requiredMessage="#{gegerauto['mensagem.requerido']}" />
+					<h:outputLabel value="#{velcao['cargo.tipoCargo']}" for="tipoCargo" />
+					<h:inputText value="#{cargoMB.cargo.tipoCargo}" id="tipoCargo"
+						maxlength="45" size="50" required="true"
+						requiredMessage="#{gegerauto['mensagem.requerido']}" />
+					<h:outputLabel value="#{velcao['cargo.gerente']}" for="idGerente" />
+					<h:selectBooleanCheckbox value="#{cargoMB.cargo.gerente}" id="idGerente" />
+					<h:outputLabel value="#{velcao['cargo.supervisao']}" for="idSupervisao" />
+					<h:selectBooleanCheckbox value="#{cargoMB.cargo.supervisao}"
+						id="idSupervisao" />
+					<h:outputLabel value="#{velcao['cargo.operacional']}" for="idOperacional" />
+					<h:selectBooleanCheckbox value="#{cargoMB.cargo.operacional}"
+						id="idOperacional" />
+
+				</h:panelGrid>
+			</fieldset>
+		</div>
+	</ui:define>
+
+</ui:composition>

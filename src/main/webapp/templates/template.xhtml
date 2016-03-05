@@ -1,0 +1,73 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich" xmlns:a4j="http://richfaces.org/a4j">
+<h:head>
+	<title><h:outputText value="#{nutricao['welcome.title']}" /></title>
+	<ui:insert name="script">
+
+
+	</ui:insert>
+</h:head>
+
+<h:body>
+	<div class="wrap">
+		<h:outputScript name="jquery.maskedinput.min.js" library="js" target="head" />
+		<h:outputScript name="jquery.maskedinput.js" library="js" target="head" />
+
+		<h:outputStylesheet library="css" name="styledefault.css" />
+		<ui:insert name="status">
+			<a4j:status onstart="#{rich:component('loading_modal')}.show()"
+				onstop="#{rich:component('loading_modal')}.hide()">
+			</a4j:status>
+		</ui:insert>
+		<!--Layout padrao para as paginas -->
+		<div class="header">
+			<ui:include src="/templates/header.xhtml" />
+		</div>
+
+		<h:form id="formGeral">
+			<div class="inner-wrap">
+				<div style="background-color: silver;">
+					<ui:include src="/pages/menu.xhtml" />
+				</div>
+				<center>
+					<div>
+						<ui:insert name="mensagens">
+							<ui:include src="/templates/messages.xhtml" />
+						</ui:insert>
+					</div>
+				</center>
+				<div class="content">
+					<div id="idComandos" style="height: 30px">
+						<ui:insert name="comandos">
+
+						</ui:insert>
+
+					</div>
+					<div id="corpo">
+						<ui:insert name="corpo">
+
+						</ui:insert>
+					</div>
+				</div>
+
+			</div>
+
+		</h:form>
+
+		<div class="footer">
+			<ui:include src="/templates/footer.xhtml" />
+		</div>
+
+	</div>
+	<!-- Modal popup de ajax -->
+	<rich:popupPanel id="loading_modal" modal="true" resizeable="false" width="80"
+		height="80">
+		<h:graphicImage value="/images/loading.gif" width="60" height="60" />
+	</rich:popupPanel>
+
+</h:body>
+</html>
+

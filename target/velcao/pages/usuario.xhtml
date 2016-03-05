@@ -1,0 +1,97 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j" xmlns:rich="http://richfaces.org/rich"
+	template="/templates/template.xhtml">
+
+
+	<ui:define name="comandos">
+		<h:panelGrid columns="2">
+
+			<h:commandButton action="#{usuarioMB.salvar()}"
+				value="#{velcao['botao.gravar']}" />
+			<h:commandButton action="#{usuarioMB.irListaUsuario()}"
+				value="#{velcao['botao.cancelar']}" styleClass="paddingLeft"
+				immediate="true" />
+		</h:panelGrid>
+	</ui:define>
+
+	<ui:define name="corpo">
+		<div style="width: 400px;">
+			<fieldset>
+				<legend>
+					<b><h:outputText value="#{velcao['menu.cadastro']} " /> <h:outputText
+							value=" #{velcao['usuario']}" /> </b>
+				</legend>
+				<br />
+				<h:panelGrid columns="2" columnClasses="column1,column2" width="100%">
+					<h:outputLabel value="#{velcao['usuario.nome']}" for="idNome" />
+					<h:panelGroup>
+						<h:inputText value="#{usuarioMB.usuario.nome}" id="idNome" required="true"
+							requiredMessage="#{velcao['mensagem.requerido']}"
+							validatorMessage="#{velcao['mensagem.email.invalido']}" maxlength="255"
+							size="50" />
+						<rich:message for="idNome" errorClass="mensagemerro" />
+					</h:panelGroup>
+					<h:outputLabel value="#{velcao['usuario.email']}" for="idEmail" />
+					<h:panelGroup>
+						<h:inputText value="#{usuarioMB.usuario.email}" id="idEmail"
+							required="true" requiredMessage="#{velcao['mensagem.requerido']}"
+							validatorMessage="#{velcao['mensagem.email.invalido']}" maxlength="255"
+							size="50">
+							<f:validateRegex
+								pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+						</h:inputText>
+						<rich:message for="idEmail" errorClass="mensagemerro" />
+					</h:panelGroup>
+
+
+
+					<h:outputLabel value="#{velcao['usuario.cpf']}" for="idCpf" />
+					<h:panelGroup>
+						<h:inputText value="#{usuarioMB.usuario.cpf}" id="idCpf" required="true"
+							requiredMessage="#{velcao['mensagem.requerido']}" size="50" />
+						<rich:jQuery query="mask('999.999.999-99')" selector="#idCpf" />
+						<rich:message for="idCpf" errorClass="mensagemerro" />
+					</h:panelGroup>
+
+					<h:outputLabel value="#{velcao['usuario.rg']}" for="idrg" />
+					<h:panelGroup>
+						<h:inputText value="#{usuarioMB.usuario.rg}" id="idrg" maxlength="255"
+							size="50"
+							validatorMessage="#{velcao['mensagem.erro.validacao.rg']}">
+							<f:validateRegex pattern="[0-9]+" />
+						</h:inputText>
+						<rich:message for="idrg" errorClass="mensagemerro" />
+					</h:panelGroup>
+					<h:outputLabel value="#{velcao['usuario.senha']}" for="idSenha" />
+					<h:panelGroup>
+						<h:inputText value="#{usuarioMB.usuario.senha}" id="idSenha"
+							required="true" requiredMessage="#{velcao['mensagem.requerido']}"
+							maxlength="255" size="50" />
+						<rich:message for="idSenha" errorClass="mensagemerro" />
+					</h:panelGroup>
+
+					<h:outputLabel value="#{velcao['usuario.telefone']}" for="idTelefone" />
+					<h:panelGroup>
+						<h:inputText value="#{usuarioMB.usuario.telefone}" id="idTelefone"
+							maxlength="255" size="50" required="true"
+							requiredMessage="#{velcao['mensagem.requerido']}" />
+						<rich:message for="idTelefone" errorClass="mensagemerro" />
+					</h:panelGroup>
+					<h:outputLabel value="#{velcao['usuario.endereco']}" for="idEndereco" />
+					<h:inputText value="#{usuarioMB.usuario.endereco}" id="idEndereco"
+						maxlength="255" size="50" />
+					<h:outputLabel value="#{velcao['cargo']}" for="idSelectCargo" />
+					<h:selectOneMenu id="idSelectCargo"
+						value="#{usuarioMB.usuario.cargo.idCargo}">
+						<f:selectItems value="#{cargoMB.listaDropDownCargo}" />
+					</h:selectOneMenu>
+
+				</h:panelGrid>
+			</fieldset>
+		</div>
+	</ui:define>
+
+</ui:composition>

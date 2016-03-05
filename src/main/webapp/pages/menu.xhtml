@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich" xmlns:a4j="http://richfaces.org/a4j">
+
+<rich:toolbar itemSeparator="none" height="40px" id="idMenu">
+
+	<a4j:commandButton value="#{velcao['home']}" action="home" immediate="true"/>
+	
+	
+	<rich:dropDownMenu mode="ajax"
+		rendered="#{loginMB.usuarioLogado != null and loginMB.usuarioLogado.administrador or loginMB.usuarioLogado.cargo.gerente or loginMB.usuarioLogado.cargo.supervisao}">
+		<f:facet name="label">
+			<h:panelGroup>
+				<h:outputText value="#{velcao['menu.cadastro']}" />
+			</h:panelGroup>
+		</f:facet>
+		<rich:menuItem label="#{velcao['menu.manter.usuario']}"
+			action="#{usuarioMB.irListaUsuario()}"
+			rendered="#{loginMB.usuarioLogado != null and loginMB.usuarioLogado.administrador or loginMB.usuarioLogado.cargo.gerente or loginMB.usuarioLogado.cargo.supervisao}" />
+
+		<rich:menuItem label="#{velcao['menu.cargo']}"
+			action="#{cargoMB.irListaCargo()}"
+			rendered="#{loginMB.usuarioLogado != null and loginMB.usuarioLogado.administrador or loginMB.usuarioLogado.cargo.gerente or loginMB.usuarioLogado.cargo.supervisao}" />
+		<rich:menuItem label="#{velcao['menu.animalMorto']}"
+			action="#{animalMortoMB.irListaAnimalMorto()}"
+			rendered="#{loginMB.usuarioLogado != null and loginMB.usuarioLogado.administrador or loginMB.usuarioLogado.cargo.gerente or loginMB.usuarioLogado.cargo.supervisao}" />
+	</rich:dropDownMenu>
+	
+	<rich:toolbarGroup location="right">
+		<h:outputText
+			value="#{loginMB.saudacao()} - #{loginMB.usuarioLogado.email} " />
+		<h:commandButton value="#{velcao['form.logout']}"
+			action="#{loginMB.sairDoSistema()}"  immediate="true"/>
+	</rich:toolbarGroup>
+
+</rich:toolbar>
+</html>

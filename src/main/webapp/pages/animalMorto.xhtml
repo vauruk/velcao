@@ -1,0 +1,57 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j" xmlns:rich="http://richfaces.org/rich"
+	template="/templates/template.xhtml">
+
+	<ui:define name="comandos">
+		<a4j:commandButton action="#{animalMortoMB.salvar()}"
+			value="#{velcao['botao.gravar']}" />
+		<h:commandButton action="#{animalMortoMB.irListaAnimalMorto()}" styleClass="paddingLeft"
+			value="#{velcao['botao.cancelar']}"  immediate="true" />
+	</ui:define>
+
+	<ui:define name="corpo">
+		<div style="width: 500px;">
+			<fieldset>
+				<legend>
+					<b><h:outputText value="#{velcao['menu.cadastro']} " /> <h:outputText
+							value=" #{velcao['animal_morto']}" /> </b>
+				</legend>
+				<!--<h:outputText value="#{animalMortoMB.animalMorto.dataRegistro}"> -->
+<!-- 					<f:convertDateTime type="both" pattern="#{animalMortoMB.patternDataTime}" timeZone="GMT-03:00"/> -->
+<!-- 				</h:outputText> -->
+				<br />
+				<h:panelGrid columns="2" columnClasses="column1,column2"  width="100%">
+					<h:outputLabel value="#{velcao['animal_morto.dataRegistro']}"
+						styleClass="fonteGeral" />
+
+					<rich:calendar value="#{animalMortoMB.animalMorto.dataRegistro}"
+					enableManualInput="true" showApplyButton="false"  
+					currentDate="#{animalMortoMB.defatultTime}"
+					datePattern="#{animalMortoMB.patternDataTime}"
+				    />
+					
+					<h:outputLabel value="#{velcao['animal_morto.nome']}" for="nome"
+						styleClass="fonteGeral" />
+					<h:inputText value="#{animalMortoMB.animalMorto.nome}" id="nome" maxlength="255"
+						required="true" size="50"
+						requiredMessage="#{velcao['mensagem.requerido']}" />
+					<h:outputLabel value="#{velcao['animal_morto.localizacao']}" for="localizacao"
+						styleClass="fonteGeral" />
+					<h:inputText value="#{animalMortoMB.animalMorto.localizacao}" id="localizacao" maxlength="255"
+						required="true" size="50"
+						requiredMessage="#{velcao['mensagem.requerido']}" />
+						
+					<h:outputLabel value="#{velcao['usuario.registro']}"
+						styleClass="fonteGeral" />
+					<h:outputText value="#{loginMB.usuarioLogado.nome}">
+					</h:outputText>
+				</h:panelGrid>
+			</fieldset>
+
+		</div>
+	</ui:define>
+
+</ui:composition>
